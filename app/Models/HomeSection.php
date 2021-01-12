@@ -17,6 +17,16 @@ class HomeSection extends Model
 
     protected $casts = ['dimensions' => 'json'];
 
+    public function collection()
+    {
+        return $this->hasOne(Collection::class, 'home_section_id', 'id');
+    }
+
+    public function banners()
+    {
+        return $this->hasMany(Banner::class);
+    }
+
     public function isTypeBanners()
     {
         return $this->type === 'banners';
