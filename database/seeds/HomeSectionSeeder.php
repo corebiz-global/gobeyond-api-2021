@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 
 use App\Models\HomeSection;
+use App\Models\Banner;
+use App\Models\Collection;
+use App\Models\Product;
 
 class HomeSectionSeeder extends Seeder
 {
@@ -36,8 +39,31 @@ class HomeSectionSeeder extends Seeder
             ],
         ];
 
+        $faker = Faker\Factory::create();
+
         foreach ($data as $section) {
             $homeSection = HomeSection::create($section);
+
+            if ($homeSection->isTypeBanners()) {
+                factory(Banner::class, $faker->numberBetween(1, 8))->make()
+                    ->each(function($banner) use ($homeSection, $faker) {
+                    $banner = $banner->toArray();
+                    $banner['image'] = $faker->imageUrl(
+                        $homeSection->dimensions['width'],
+                        $homeSection->dimensions['height'],
+                        'animals',
+                        true
+                    );
+
+                    $homeSection->banners()->create($banner);
+                });
+            } else {
+                $homeSection->collection()->create(factory(Collection::class)->make()->toArray());
+                $products = Product::orderByRaw('RANDOM()')
+                    ->limit($faker->numberBetween(4, 10))
+                    ->get()->pluck('id');
+                $homeSection->collection->products()->attach($products);
+            }
         }
     }
 }

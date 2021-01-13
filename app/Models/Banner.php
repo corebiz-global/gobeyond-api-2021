@@ -12,4 +12,9 @@ class Banner extends Model
         'available_at' => 'datetime',
         'expires_in'   => 'datetime',
     ];
+
+    public function homeSection()
+    {
+        return $this->belongsTo(HomeSection::class, 'home_section_id', 'id');
+    }
 }

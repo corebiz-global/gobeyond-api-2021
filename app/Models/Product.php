@@ -17,4 +17,9 @@ class Product extends Model
         'promotional_price',
         'installment_limit'
     ];
+
+    public function collections()
+    {
+        return $this->belongsToMany(Collection::class, 'collections_products');
+    }
 }
