@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('contacts', 'Api\ContactController@index');
+// Route::get('contacts/{id}', 'Api\ContactController@find');
+Route::post('contacts', 'Api\ContactController@store');
+// Route::put('contacts/{id}', 'Api\ContactController@update');
+// Route::patch('contacts/{id}', 'Api\ContactController@update');
+// Route::delete('contacts/{id}', 'Api\ContactController@destroy');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
