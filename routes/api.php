@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('contacts', 'Api\ContactController@index');
-// Route::get('contacts/{id}', 'Api\ContactController@find');
-Route::post('contacts', 'Api\ContactController@store');
-// Route::put('contacts/{id}', 'Api\ContactController@update');
-// Route::patch('contacts/{id}', 'Api\ContactController@update');
-// Route::delete('contacts/{id}', 'Api\ContactController@destroy');
+Route::group(['prefix' => 'contacts'], function() {
+    // Route::get('', 'Api\ContactController@index');
+    // Route::get('{id}', 'Api\ContactController@find');
+    Route::post('', 'Api\ContactController@store');
+    // Route::put('{id}', 'Api\ContactController@update');
+    // Route::patch('{id}', 'Api\ContactController@update');
+    // Route::delete('{id}', 'Api\ContactController@destroy');
+});
 
 Route::get('sections/home', 'Api\HomeSectionController@index');
 
