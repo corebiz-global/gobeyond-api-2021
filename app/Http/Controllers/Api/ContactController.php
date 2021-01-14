@@ -36,16 +36,20 @@ class ContactController extends Controller
         if ($validation->fails())
             return response()->json(['errors' => $validation->errors()], 422);
 
-        $contact = Contact::create(
-            $request->only([
-                'name',
-                'email',
-                'subject',
-                'message',
-                'authorize_receiving_emails'
-            ])
-        );
+        try {
+            $contact = Contact::create(
+                $request->only([
+                    'name',
+                    'email',
+                    'subject',
+                    'message',
+                    'authorize_receiving_emails'
+                ])
+            );
 
-        return response($contact, 201);
+            return response($contact, 201);
+        } catch(\Exception $e) {
+            return response()->json(['message'=> 'Ocorreu um erro inesperado'], 500);
+        }
     }
 }
