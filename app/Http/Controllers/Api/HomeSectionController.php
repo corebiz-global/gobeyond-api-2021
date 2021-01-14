@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\HomeSection;
 use App\Http\Resources\SectionResource;
 
+use DB;
+
 class HomeSectionController extends Controller
 {
     public function index()
@@ -15,7 +17,8 @@ class HomeSectionController extends Controller
         $sections = HomeSection::with(
             [
                 'banners' => function($query) {
-                    $query->orderBy('order');
+                    // Metodo available está executando o Banner::scopeAvailable
+                    $query->available()->orderBy('order');
                 },
                 'collection.products'
             ]
