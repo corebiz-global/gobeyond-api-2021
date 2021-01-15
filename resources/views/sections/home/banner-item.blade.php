@@ -12,16 +12,14 @@
                 </button>
             </form>
         </div>
-        <img src="{{ asset("storage/{$banner->image}") }}"
-            class="card-img-top"
-            style="width: 100%; height: auto;">
+        <img src="{{ $banner->image }}" class="card-img-top" style="width: 100%; height: auto;">
         <div class="card-body">
             <p class="card-text">
-                <strong>Disponível a partir de </strong> {{ $banner->available_at->format('d/m/Y H:i:s')}}
+                <strong>Disponível a partir de </strong> {{ $banner->available_at->format('d/m/Y')}}
             </p>
             @if($banner->expires_in)
                 <p class="card-text">
-                    <strong>Expira em</strong> {{ $banner->expires_in->format('d/m/Y H:i:s') }}
+                    <strong>Expira em</strong> {{ $banner->expires_in->format('d/m/Y') }}
                 </p>
             @endif
         </div>
