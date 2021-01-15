@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', 'DashboardController');
+    Route::get('/', 'DashboardController')->name('dashboard');
+
+    Route::group(['prefix' => 'contacts'], function() {
+        Route::get('', 'ContactController@index')->name('contacts.index');
+        Route::get('{id}', 'ContactController@show')->name('contacts.show')->where('id', '[0-9]+');
+    });
 });
 
 Auth::routes();
