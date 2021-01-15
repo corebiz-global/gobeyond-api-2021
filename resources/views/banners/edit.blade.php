@@ -14,24 +14,6 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="section-id">Seção</label>
-                        <select class="custom-select @error('home_section_id') is-invalid @enderror" required name="home_section_id" id="section-id">
-                            <option>Selecione uma opção</option>
-                            @foreach($sections as $section)
-                                <option value="{{ $section->id}}" @if($form['home_section_id'] == $section->id) selected @endif>
-                                    {{ $section->order }}º Seção da Home
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('home_section_id')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
                         <label for="available_at">Disponível a partir de</label>
                         <input
                             type="text"
@@ -73,7 +55,7 @@
             <div class="row">
                 <div class="col-4 d-flex flex-column">
                     <strong>Imagem Atual</strong>
-                    <img src="{{ asset('storage/' . $form['image']) }}" class="img-fluid" />
+                    <img src="{{ $form['image'] }}" class="img-fluid" />
                 </div>
                 <div class="col-8">
                     <div class="form-group">
