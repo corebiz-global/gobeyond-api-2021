@@ -69,7 +69,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <th colspan="5" class="text-center">Nenhum contato encontrado</th>
+                                <th colspan="7" class="text-center">Nenhum produto encontrado</th>
                             </tr>
                         @endforelse
                     </tbody>
