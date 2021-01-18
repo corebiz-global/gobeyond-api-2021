@@ -52,15 +52,13 @@ class BannerController extends Controller
         if (!$banner)
             return redirect()->route('banners.create');
 
-        $sections = HomeSection::where('type', 'banners')->get();
-
         $form = $banner->toArray();
         $form['available_at'] = $banner->available_at->format('d/m/Y');
 
         if ($form['expires_in'])
             $form['expires_in'] = $banner->expires_in->format('d/m/Y');
 
-        return view('banners.edit', compact('sections', 'form'));
+        return view('banners.edit', compact('form'));
     }
 
     public function update(Request $request, $id)

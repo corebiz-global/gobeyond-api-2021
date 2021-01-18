@@ -41,8 +41,11 @@ class CollectionController extends Controller
             ->with('collection')
             ->first();
 
+        if (!$section)
+            return redirect()->back();
+
         $request->validate([
-            'title' => 'max:255',
+            'title' => 'required|max:255',
             'product_id' => 'required|array'
         ]);
 
@@ -58,7 +61,7 @@ class CollectionController extends Controller
 
         cache()->forget('dashboard-data');
 
-        return redirect()->route('home_section.index')->with('section_active_id', $section->id);
+        return redirect()->route('home_section.index')->with(['section_active_id' => $section->id]);
     }
 
     public function destroy(Request $request, $sectionId)
@@ -68,12 +71,15 @@ class CollectionController extends Controller
             ->with('collection')
             ->first();
 
+        if (!$section)
+            return redirect()->back();
+
         if ($section->collection) {
             $section->collection->delete();
         }
 
         cache()->forget('dashboard-data');
 
-        return redirect()->route('home_section.index')->with('section_active_id', $section->id);
+        return redirect()->route('home_section.index')->with(['section_active_id' => $section->id]);
     }
 }
